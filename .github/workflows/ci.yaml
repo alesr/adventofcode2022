@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+    branches:
+    - '*'
+  pull_request:
+    branches:
+    - '*'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
+    
+    - name: install go
+      uses: actions/setup-go@v2
+    
+    - name: go fmt
+      run: go fmt -x -mod=vendor ./...
+    
+    - name: go vet
+      run: go vet -x -mod=vendor ./...
+    
+    - name: unit tests
+      run: go test -v -count=1 --race --cover -coverprofile=coverage.txt -covermode=atomic --short ./...
+    
+    - name: upload coverage
+      run: bash <(curl -s https://codecov.io/bash)
