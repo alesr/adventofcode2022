@@ -15,12 +15,12 @@ func TestPart2(t *testing.T) {
 	}{
 		{
 			name:             "example",
-			givenFile:        "day1_test_input.txt",
+			givenFile:        "input_data_test",
 			expectedCalories: 45000,
 		},
 		{
 			name:             "input",
-			givenFile:        "day1_input.txt",
+			givenFile:        "input_data",
 			expectedCalories: 205805,
 		},
 	}
